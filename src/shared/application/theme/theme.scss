@@ -1,0 +1,6 @@
+@import './fonts.scss';
+
+html {
+	@extend .font-text;
+	font-size: 10px;
+}
