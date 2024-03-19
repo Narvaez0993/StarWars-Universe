@@ -1,0 +1,14 @@
+@mixin small-view {
+	@media (max-width: 450px) {
+		@content;
+	}
+}
+
+@mixin medium-view {
+	@media (max-width: 768px) {
+		@content;
+	}
+}
+
+
+
