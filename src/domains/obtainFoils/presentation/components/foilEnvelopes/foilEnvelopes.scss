@@ -1,0 +1,35 @@
+.card{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 250px;
+    height: 350px;
+    border-radius: 20px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    background: transparent;
+    // background: -webkit-linear-gradient(7deg, #323232,#921816,#323232);/* Chrome 10-25, Safari 5.1-6 */                          background: linear-gradient(7deg, #323232,#921816,#323232);/* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */                                             
+
+    .card_article{
+        width: max-content;
+
+        .moving-image {
+            animation: moveUpDown 2s ease-in-out infinite alternate;
+            filter: drop-shadow(0 0 0.75rem crimson);
+            width: 75px;
+        }
+    }
+
+    @keyframes moveUpDown {
+        0% {
+          transform: translateY(0);
+        }
+        100% {
+          transform: translateY(-20px);
+        }
+      }
+}
+
+
+
+  
+ 

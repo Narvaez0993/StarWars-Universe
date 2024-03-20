@@ -1,5 +1,6 @@
-import React, {useState} from "react";
+import {useState} from "react";
 import Navbar from "./navbar";
+import PropTypes from 'prop-types';
 import './layout.scss';
 
 
@@ -15,5 +16,9 @@ const MainLayout = ({children}) =>{
         </div>
     )
 }
+
+MainLayout.propTypes = {
+    children: PropTypes.node,
+};
 
 export default MainLayout;

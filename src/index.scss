@@ -3,3 +3,9 @@
 @import './shared/application/theme/mixins.scss';
 @import './shared/application/theme/variables.scss';
 @import './shared/application/theme/theme.scss';
+
+*{
+	padding: 0;
+	margin: 0;
+	box-sizing: border-box;
+}
