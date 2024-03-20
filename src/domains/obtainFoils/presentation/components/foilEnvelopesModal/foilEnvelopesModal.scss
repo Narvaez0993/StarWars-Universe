@@ -1,0 +1,24 @@
+.foil-modal-container{
+
+    .modal-selectors{
+        display: flex;
+        justify-content: space-between;
+    }
+
+    .cards-container{
+        display: flex;
+        flex-wrap: wrap;
+        gap: 30px;
+        justify-content: center;
+        margin-top: 4rem;
+        height: 70%;
+
+        .modal-card{
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+    }
+}    
+    
+   
