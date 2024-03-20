@@ -1,0 +1,16 @@
+.foils-container{
+    display: flex;
+    flex-direction: column;
+    gap: 70px;
+
+    .section-title{
+        font-size: 30px;
+        font-weight: bold;
+    }
+
+    .selection-cards{
+        display: flex;
+        gap: 30px;
+        flex-wrap: wrap;
+    }
+}

@@ -1,4 +1,3 @@
-import React from 'react';
 import {
 	FaAngleRight,
 	FaAngleLeft, 
@@ -7,9 +6,10 @@ import {
     FaBars,
     FaBook,  
 } from 'react-icons/fa';
-import { myAlbum, home, obtainFoils } from "../../../../infraestructure/routes";
+import { myAlbum, home, obtainFoils } from "../../../../infraestructure/routing/routes";
 import starwarsLogo from '../../../../../assets/star-wars.svg';
 import { NavLink } from "react-router-dom";
+import PropTypes from 'prop-types';
 import './navbar.scss'
 
 const ICON_SIZE = 20;
@@ -64,5 +64,10 @@ const Navbar = ({visible, show}) => {
         </>
     )
 }
+
+Navbar.propTypes = {
+    visible: PropTypes.bool,
+    show: PropTypes.func
+};
 
 export default Navbar;
