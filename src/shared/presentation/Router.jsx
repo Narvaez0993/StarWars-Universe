@@ -1,7 +1,9 @@
-import { home, myAlbum, obtainFoils } from "../infraestructure/routing/routes";
+import { home, myAlbumCharacters, myAlbumFilms, myAlbumStarShips } from "../infraestructure/routing/routes";
 import MainLayout from "./components/layout";
-import MyAlbum from "../../domains/myAlbum/presentation/pages/myAlbum";
 import FoilsPage from "../../domains/obtainFoils/presentation/pages/foilsPage";
+import Film from '../../domains/myAlbum/presentation/pages/film';
+import Character from '../../domains/myAlbum/presentation/pages/character';
+import StarShip from '../../domains/myAlbum/presentation/pages/starship'
 import {
     createBrowserRouter,
 } from "react-router-dom";
@@ -10,16 +12,20 @@ const Router = createBrowserRouter(
   [
     {
       path: home,
-      element: <MainLayout><h1>Inicio</h1></MainLayout>,
-    },
-    {
-      path: obtainFoils,
       element: <MainLayout><FoilsPage /></MainLayout>,
     },
     {
-      path: myAlbum,
-      element: <MainLayout><MyAlbum /></MainLayout>,
+      path: myAlbumFilms,
+      element: <MainLayout><Film/></MainLayout>
     },
+    {
+      path: myAlbumCharacters,
+      element: <MainLayout><Character/></MainLayout>
+    },
+    {
+      path: myAlbumStarShips,
+      element: <MainLayout><StarShip/></MainLayout>
+    }
 ]);
 
   
