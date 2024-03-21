@@ -34,7 +34,7 @@ const FoilEnvelopesModal = ({filteredCards, showModal, setShowModal }) => {
             const { id, resourceType } = extractIdAndResourceType(card.url);
             const cardExists = findResourceType(id, resourceType)
             return (
-                <div key={index} className="card modal-card">
+                <div key={index} className="modal-card">
                     <p>ID: {id}</p>
                     <p>Categoria: {category[resourceType]}</p>
                     <p>{card.name || card.title}</p> 
@@ -59,7 +59,7 @@ const FoilEnvelopesModal = ({filteredCards, showModal, setShowModal }) => {
 
     return(
 
-        <Modal isOpen={showModal} onRequestClose={handleCloseModal}>
+        <Modal overlayClassName="custom-overlay" isOpen={showModal} onRequestClose={handleCloseModal}>
             <div className='foil-modal-container'>
                 <div className='modal-selectors'>
                     <h2>Láminas Generadas</h2>

@@ -1,11 +1,14 @@
-import {useState} from "react";
+import {useState, useEffect, useContext } from "react";
 import { useSelector } from "react-redux";
 import { allFilms, allStarships, allCharacters } from "../../../../../shared/application/redux/selectors/selector";
 import FoilEnvelopesModal from "../foilEnvelopesModal";
 import PropTypes from 'prop-types';
+import { TimerContext } from "../timer/timerContext";
 import './foilEnvelopes.scss';
 
-const FoilEnvelopes = ({image}) => {
+const FoilEnvelopes = ({image, title, description, txtBtn}) => {
+    const { timer, setTimer } = useContext(TimerContext);
+
     const films = useSelector(allFilms);
     const starShips = useSelector(allStarships);
     const characters = useSelector(allCharacters);
@@ -13,11 +16,21 @@ const FoilEnvelopes = ({image}) => {
     const [cards, setcards] = useState(null);
     const [showModal, setShowModal] = useState(false);
 
+    useEffect(() => {
+        const savedTimer = localStorage.getItem('foilTimer');
+        if (savedTimer) {
+            setTimer(parseInt(savedTimer));
+        }
+    }, []);
+
     const handleCard = () => {
         const configuration = Math.random() < 0.5 ? 1 : 2;
         const cards = generateCards(configuration);
+
         setcards(cards)
         setShowModal(true);
+
+        setTimer(60); 
     }
 
     const generateCards = (configuration) => {
@@ -44,23 +57,42 @@ const FoilEnvelopes = ({image}) => {
 
     return(
         <>
-            <div className="card" onClick={() => handleCard()}>
-                <article className="card_article">
-                    <img className="moving-image" src={image} alt="" />
-                </article>
+            <div className="wrapper">
+                <div className="card" onClick={timer > 0 ? null : handleCard} >
+                    <article className="card_article">
+                        <img className="moving-image" src={image} alt="" />
+                    </article>
+                    {timer > 0 ? (
+                        <div className="info-timer">
+                            <p>Tiempo de espera</p>
+                            <h1>{timer}</h1>
+                        </div>
+                    ): (
+                        <div className="info">
+                            <h1>{title}</h1>
+                            <p>{description}</p>
+                            <a className="btn" onClick={() => handleCard()}>{txtBtn}</a>
+                        </div>
+                    )}
+                </div>
             </div>
 
-            <FoilEnvelopesModal
-                filteredCards={cards}
-                showModal={showModal}
-                setShowModal={setShowModal}
-            />
+            <div>
+                <FoilEnvelopesModal
+                    filteredCards={cards}
+                    showModal={showModal}
+                    setShowModal={setShowModal}
+                /> 
+            </div>
         </>
     )
 }
 
 FoilEnvelopes.propTypes = {
-    image: PropTypes.string,
+    image: PropTypes.string.isRequired,
+    title: PropTypes.string.isRequired, 
+    description: PropTypes.string.isRequired,
+    txtBtn: PropTypes.string.isRequired
 };
 
 export default FoilEnvelopes;
