@@ -9,7 +9,13 @@ const FoilsPage = () => {
             <h1 className="section-title">Abre y obtén láminas exclusivas</h1>
             <div className="selection-cards">
                 {optionCards.map((card,index) => (
-                    <FoilEnvelopes key={index} image={card?.image}/>
+                    <FoilEnvelopes 
+                        key={index} 
+                        image={card?.image} 
+                        title={card?.title}
+                        description={card?.description}
+                        txtBtn={'Abrir'}
+                    />
                 ))}
             </div>
         </div>

@@ -7,6 +7,7 @@ import { useDispatch } from 'react-redux';
 import { GetStarships, getCharacters } from "./shared/infraestructure/api/request";
 import { GetFilms } from "./shared/infraestructure/api/request";
 import { loadFromLocalStorage } from "./domains/obtainFoils/application/slices/foilsObtained";
+import TimerProvider from "./domains/obtainFoils/presentation/components/timer/timerContext";
 
 
 const App = () => {
@@ -24,7 +25,10 @@ const App = () => {
     }, [initialized, dispatch]);
 
     return (
-        <RouterProvider router={Router}/>
+        <TimerProvider>
+            <RouterProvider router={Router}/>
+        </TimerProvider>
+        
     )
 }
 

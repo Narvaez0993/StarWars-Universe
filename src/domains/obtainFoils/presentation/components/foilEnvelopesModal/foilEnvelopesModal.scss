@@ -16,9 +16,31 @@
         .modal-card{
             display: flex;
             flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            width: 220px;
+            height: 350px;
+            border-radius: 20px;
+            background: transparent;
+            padding: 2rem 1rem;
+      
             gap: 10px;
+            box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
         }
     }
 }    
     
+
+.custom-overlay {
+    /* Asegura que el overlay cubra toda la pantalla */
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    /* Fondo semitransparente */
+    background-color: rgba(0, 0, 0, 0.5); /* Ajusta la opacidad según desees */
+    /* Z-index para asegurar que el modal esté en primer plano */
+    z-index: 9999; /* Ajusta según sea necesario */
+  }
    
