@@ -1,24 +1,44 @@
-import './foilEnvelopesModal.scss';
+import { useState } from 'react';
 import Modal from 'react-modal';
 import { FaRegWindowClose } from "react-icons/fa";
-import { extractIdAndResourceType } from '../../../../../shared/application/helpers/common-functions';
+import { extractIdAndResourceType, categoryFoils } from '../../../../../shared/application/helpers/common-functions';
 import { obtainedFoils } from '../../../application/selectors/foilsObtained';
 import { category } from '../../../application/constants/optionCards';
 import { addItem } from '../../../application/slices/foilsObtained';
 import { useDispatch, useSelector } from 'react-redux';
+import { toast, ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import PropTypes from 'prop-types';
+import './foilEnvelopesModal.scss';
 
 Modal.setAppElement('#root');
 
 const FoilEnvelopesModal = ({filteredCards, showModal, setShowModal }) => {
     const dispatch = useDispatch();
     const obtainedFoilsSelector = useSelector(obtainedFoils);
+    const [displayedCards, setDisplayedCards] = useState(filteredCards);
 
     const handleCardAction = (id, resourceType) => {
         const storedIds = obtainedFoilsSelector[resourceType] || [];
         if (!storedIds.includes(id)) {
             dispatch(addItem({ id: id, resourceType: resourceType }));
+            updatedDisplayedCards(id, resourceType)
         }
+
+        showToast("Lamina añadida!", 'success');
+    }
+
+    const handleDeleteCard = (cardId, cardResourceType) => {
+        updatedDisplayedCards(cardId, cardResourceType)
+        showToast("Lamina Descartada!", 'error');
+    }
+
+    const updatedDisplayedCards = (cardId, cardResourceType) => {
+        const newState = displayedCards.filter(card => {
+            const { id, resourceType } = extractIdAndResourceType(card?.url);
+            return !(id === cardId && resourceType === cardResourceType);
+        });
+        setDisplayedCards(newState);
     }
 
     const findResourceType = (id, resourceType) => {
@@ -26,22 +46,37 @@ const FoilEnvelopesModal = ({filteredCards, showModal, setShowModal }) => {
     
         return storedIds.includes(id);
     }
+
+    const showToast = (message, type) => {
+        toast[type](message, {
+            position: "top-center",
+            autoClose: 2000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme:'dark'
+        });
+    }
     
     const renderCards = () => {
-        if (!filteredCards) return null;
+        if (!displayedCards) return null;
 
-        return filteredCards.map((card, index) => {
+        return displayedCards.map((card, index) => {
             const { id, resourceType } = extractIdAndResourceType(card.url);
+            const categoryCard = categoryFoils(id, resourceType)
             const cardExists = findResourceType(id, resourceType)
             return (
                 <div key={index} className="modal-card">
                     <p>ID: {id}</p>
                     <p>Categoria: {category[resourceType]}</p>
-                    <p>{card.name || card.title}</p> 
+                    <p>{categoryCard}</p>
+                    <p>{card?.name || card?.title}</p> 
                     <div>
                         
                         {cardExists ? (
-                            <button>Descartar</button>
+                            <button onClick={() => handleDeleteCard(id, resourceType)}>Descartar</button>
                         ) : (
                             <button onClick={() => handleCardAction(id, resourceType)}>Añadir lamina</button>
                         )
@@ -59,17 +94,29 @@ const FoilEnvelopesModal = ({filteredCards, showModal, setShowModal }) => {
 
     return(
 
-        <Modal overlayClassName="custom-overlay" isOpen={showModal} onRequestClose={handleCloseModal}>
+        <Modal 
+            overlayClassName="custom-overlay" 
+            isOpen={showModal} 
+            onRequestClose={handleCloseModal}
+
+            style={{
+                content: {
+                  borderRadius: '10px',
+                  background: '#1f1f1f'
+                }
+            }}
+        >
             <div className='foil-modal-container'>
                 <div className='modal-selectors'>
-                    <h2>Láminas Generadas</h2>
                     <FaRegWindowClose  onClick={handleCloseModal} />
                 </div>
-
+                <h1 className='title'>Laminas Generadas</h1>
                 <div className="cards-container">
                     {renderCards()}
                 </div> 
             </div>
+
+            <ToastContainer />
         </Modal>
     )
 }

@@ -15,6 +15,7 @@ const FoilEnvelopes = ({image, title, description, txtBtn}) => {
 
     const [cards, setcards] = useState(null);
     const [showModal, setShowModal] = useState(false);
+    const [locked, setLocked] = useState(false)
 
     useEffect(() => {
         const savedTimer = localStorage.getItem('foilTimer');
@@ -27,6 +28,7 @@ const FoilEnvelopes = ({image, title, description, txtBtn}) => {
         const configuration = Math.random() < 0.5 ? 1 : 2;
         const cards = generateCards(configuration);
 
+        setLocked(true)
         setcards(cards)
         setShowModal(true);
 
@@ -58,32 +60,42 @@ const FoilEnvelopes = ({image, title, description, txtBtn}) => {
     return(
         <>
             <div className="wrapper">
+                {/* <div className="card" onClick={() => timer < 0 && handleCard} > */}
                 <div className="card" onClick={timer > 0 ? null : handleCard} >
                     <article className="card_article">
                         <img className="moving-image" src={image} alt="" />
                     </article>
-                    {timer > 0 ? (
+
+                    {locked ? (
                         <div className="info-timer">
-                            <p>Tiempo de espera</p>
-                            <h1>{timer}</h1>
+                            <h1>Abierto</h1>
                         </div>
-                    ): (
-                        <div className="info">
-                            <h1>{title}</h1>
-                            <p>{description}</p>
-                            <a className="btn" onClick={() => handleCard()}>{txtBtn}</a>
-                        </div>
+                    ) : (
+                        timer > 0 ? (
+                            <div className="info-timer">
+                                <p>Tiempo de espera</p>
+                                <h1>{timer}</h1>
+                            </div>
+                        ) : (
+                            <div className="info">
+                                <h1>{title}</h1>
+                                <p>{description}</p>
+                                <a className="btn" onClick={timer > 0 ? null : handleCard}>{txtBtn}</a>
+                            </div>
+                        )
                     )}
                 </div>
             </div>
 
-            <div>
-                <FoilEnvelopesModal
-                    filteredCards={cards}
-                    showModal={showModal}
-                    setShowModal={setShowModal}
-                /> 
-            </div>
+            {showModal && (
+                <div>
+                    <FoilEnvelopesModal
+                        filteredCards={cards}
+                        showModal={showModal}
+                        setShowModal={setShowModal}
+                    /> 
+                </div>
+            )}
         </>
     )
 }

@@ -34,7 +34,7 @@ export const objectPeople = (data) => {
             <p>Color de ojos: {data.eye_color}</p>
             <p>Año de nacimiento: {data.birth_year}</p>
             <p>Género: {data.gender}</p>
-            <p>Creado: {date(data?.creted)}</p>
+            <p>Creado: {data?.creted}</p>
             <p>Editado: {data.edited}</p>
         </div>
     )
@@ -66,7 +66,6 @@ export const objectStarship = (data) => {
 
 const InformationModal = ({ data, showModal, setShowModal }) => {
 
-    console.log(data)
     const handleCloseModal = () => {
         setShowModal(false);
     } 
@@ -85,7 +84,17 @@ const InformationModal = ({ data, showModal, setShowModal }) => {
     };
 
     return(
-        <Modal overlayClassName="custom-overlay" isOpen={showModal} onRequestClose={handleCloseModal}>
+        <Modal 
+            overlayClassName="custom-overlay" 
+            isOpen={showModal} 
+            onRequestClose={handleCloseModal}
+             style={{
+                content: {
+                  borderRadius: '10px',
+                  background: '#1f1f1f'
+                }
+            }}
+        >
              <div className='foil-modal-container'>
                 {renderObject()} 
             </div>
