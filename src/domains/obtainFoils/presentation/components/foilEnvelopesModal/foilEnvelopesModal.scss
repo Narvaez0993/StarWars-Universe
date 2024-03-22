@@ -1,8 +1,22 @@
-.foil-modal-container{
+@import '../../../../../shared/application/theme/mixins.scss';
 
+.cutom-modal{
+    background-color: aqua !important;
+}
+
+.foil-modal-container{
+    height: 100%;
     .modal-selectors{
         display: flex;
-        justify-content: space-between;
+        color: white;
+        justify-content: flex-end;
+        cursor: pointer;
+    }
+
+    .title{
+        margin-top: 4rem;
+        text-align: center;
+        color: white;
     }
 
     .cards-container{
@@ -10,37 +24,47 @@
         flex-wrap: wrap;
         gap: 30px;
         justify-content: center;
-        margin-top: 4rem;
         height: 70%;
+        align-items: center;
 
         .modal-card{
             display: flex;
             flex-direction: column;
-            justify-content: center;
+            justify-content: space-between;
             align-items: center;
             width: 220px;
             height: 350px;
             border-radius: 20px;
-            background: transparent;
+            background: white;
             padding: 2rem 1rem;
+            text-align: center;
       
             gap: 10px;
             box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
         }
     }
 }    
-    
 
 .custom-overlay {
-    /* Asegura que el overlay cubra toda la pantalla */
     position: fixed;
     top: 0;
     left: 0;
     right: 0;
     bottom: 0;
-    /* Fondo semitransparente */
-    background-color: rgba(0, 0, 0, 0.5); /* Ajusta la opacidad según desees */
-    /* Z-index para asegurar que el modal esté en primer plano */
-    z-index: 9999; /* Ajusta según sea necesario */
-  }
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 9999;
+}
+
+@include small-view {
+    .title{
+        margin-top: 0px !important;
+        margin-bottom: 50px;
+    }
+
+    .modal-card{
+        font-size: 16px !important;
+        width: 150px !important;
+        height: 250px !important;
+    }
+}
    

@@ -1,3 +1,5 @@
+@import '../../../../../shared/application/theme/mixins.scss';
+
 .wrapper{
   display: flex;
 	justify-content: space-between;
@@ -14,6 +16,7 @@
     padding: 2rem 1rem;
     position: relative;
     transition: 0.5s all ease-in-out;
+    cursor: pointer;
     
     &:hover {
       transform: translateY(-10px);
@@ -28,9 +31,9 @@
       position: absolute;
       top: 0;
       left: 0;
-      width: 100%;
-      height: 100%;
-      background: linear-gradient(to bottom, rgba(13, 36, 63, 0.3), rgba(13, 36, 63, 1));
+      width: inherit;
+      height: inherit;
+      background: linear-gradient(to bottom, rgba(13, 36, 63, 0.3), rgb(255 255 255 / 19%));;
       z-index: 2;
       opacity: 0;
       transition: 0.5s all;
@@ -46,7 +49,7 @@
         position: absolute;
         top: 0;
         left: 0;
-        filter: drop-shadow(0 0 0.75rem black);
+        box-shadow: 0 0 0.75rem #ffffff9c;
       }
     }
 
@@ -102,6 +105,23 @@
   }
 }
 
+@include small-view {
+
+    .card{
+      width: 150px !important;
+      height: 250px !important;
+
+      .info{
+        h1{
+          line-height: 26px !important;
+          font-size: 26px !important;
+        }
+      }
+    }
+
+
+  
+}
 
 
   

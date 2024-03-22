@@ -4,6 +4,7 @@ import FoilsPage from "../../domains/obtainFoils/presentation/pages/foilsPage";
 import Film from '../../domains/myAlbum/presentation/pages/film';
 import Character from '../../domains/myAlbum/presentation/pages/character';
 import StarShip from '../../domains/myAlbum/presentation/pages/starship'
+import ErrorPage from "./components/errorPage";
 import {
     createBrowserRouter,
 } from "react-router-dom";
@@ -13,6 +14,7 @@ const Router = createBrowserRouter(
     {
       path: home,
       element: <MainLayout><FoilsPage /></MainLayout>,
+      errorElement:<ErrorPage/>
     },
     {
       path: myAlbumFilms,
