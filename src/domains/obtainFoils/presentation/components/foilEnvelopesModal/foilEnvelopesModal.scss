@@ -14,7 +14,7 @@
     }
 
     .title{
-        margin-top: 4rem;
+        margin: 2rem 0;
         text-align: center;
         color: white;
     }
@@ -35,12 +35,37 @@
             width: 220px;
             height: 350px;
             border-radius: 20px;
-            background: white;
-            padding: 2rem 1rem;
             text-align: center;
-      
+            background: #1f1f1fbf;
+            color: white;
+            box-shadow: 0 0 0.75rem #ffffff9c;
             gap: 10px;
-            box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+        }
+
+        .content-info{
+            height: 86%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            gap: 21px;
+        }
+
+        .content-button{
+            width: 100%;
+            border-radius: 20px;
+            height: 50px;
+            display: flex;
+            justify-content: center;
+            align-items: baseline;
+
+
+            button{
+                border-radius: 10px;
+                padding: 4px 20px;
+                border-color: transparent;
+                background: #ffc500;
+                cursor: pointer;
+            }
         }
     }
 }    
@@ -56,15 +81,31 @@
 }
 
 @include small-view {
-    .title{
-        margin-top: 0px !important;
-        margin-bottom: 50px;
+    .foil-modal-container{
+        .title{
+            margin-top: 0px !important;
+            margin-bottom: 50px;
+        }
+
+        .modal-card{
+            font-size: 16px !important;
+            width: 150px !important;
+            height: 250px !important;
+        }
+
+        button{
+            font-size: 13px !important;
+        }
     }
 
-    .modal-card{
-        font-size: 16px !important;
-        width: 150px !important;
-        height: 250px !important;
+    .ReactModalPortal{
+        div{
+          div{
+            backdrop-filter: none !important;
+            background-color: black !important;
+            padding: 5px !important;
+          }
+        }
     }
 }
    

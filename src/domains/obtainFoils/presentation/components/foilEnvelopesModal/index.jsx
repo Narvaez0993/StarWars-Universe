@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import Modal from 'react-modal';
 import { FaRegWindowClose } from "react-icons/fa";
 import { extractIdAndResourceType, categoryFoils } from '../../../../../shared/application/helpers/common-functions';
@@ -17,6 +17,12 @@ const FoilEnvelopesModal = ({filteredCards, showModal, setShowModal }) => {
     const dispatch = useDispatch();
     const obtainedFoilsSelector = useSelector(obtainedFoils);
     const [displayedCards, setDisplayedCards] = useState(filteredCards);
+
+    useEffect(() => {
+        if (displayedCards.length === 0 && showModal) {
+            handleCloseModal();
+        }
+    }, [displayedCards, showModal]);
 
     const handleCardAction = (id, resourceType) => {
         const storedIds = obtainedFoilsSelector[resourceType] || [];
@@ -69,12 +75,14 @@ const FoilEnvelopesModal = ({filteredCards, showModal, setShowModal }) => {
             const cardExists = findResourceType(id, resourceType)
             return (
                 <div key={index} className="modal-card">
-                    <p>ID: {id}</p>
-                    <p>Categoria: {category[resourceType]}</p>
-                    <p>{categoryCard}</p>
-                    <p>{card?.name || card?.title}</p> 
-                    <div>
-                        
+                    <div className='content-info'>
+                        <p><strong>{category[resourceType]}</strong></p>
+                        <p>Id: {id}</p>
+                        <p>{categoryCard}</p>
+                        <p>{card?.name || card?.title}</p>
+                    </div>
+
+                    <div className='content-button'>
                         {cardExists ? (
                             <button onClick={() => handleDeleteCard(id, resourceType)}>Descartar</button>
                         ) : (
@@ -93,16 +101,16 @@ const FoilEnvelopesModal = ({filteredCards, showModal, setShowModal }) => {
     }
 
     return(
-
         <Modal 
             overlayClassName="custom-overlay" 
             isOpen={showModal} 
             onRequestClose={handleCloseModal}
-
             style={{
                 content: {
-                  borderRadius: '10px',
-                  background: '#1f1f1f'
+                borderRadius: '10px',
+                background: 'black',
+                borderColor: 'transparent',
+                boxShadow: '0 0 0.75rem #ffffff9c'
                 }
             }}
         >

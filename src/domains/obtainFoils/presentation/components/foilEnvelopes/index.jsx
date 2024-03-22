@@ -1,4 +1,4 @@
-import {useState, useEffect, useContext } from "react";
+import React, {useEffect, useState, useContext, useCallback } from "react";
 import { useSelector } from "react-redux";
 import { allFilms, allStarships, allCharacters } from "../../../../../shared/application/redux/selectors/selector";
 import FoilEnvelopesModal from "../foilEnvelopesModal";
@@ -60,8 +60,7 @@ const FoilEnvelopes = ({image, title, description, txtBtn}) => {
     return(
         <>
             <div className="wrapper">
-                {/* <div className="card" onClick={() => timer < 0 && handleCard} > */}
-                <div className="card" onClick={timer > 0 ? null : handleCard} >
+                <div className="card" onClick={(timer > 0 || locked) ? null : handleCard} >
                     <article className="card_article">
                         <img className="moving-image" src={image} alt="" />
                     </article>
@@ -80,7 +79,7 @@ const FoilEnvelopes = ({image, title, description, txtBtn}) => {
                             <div className="info">
                                 <h1>{title}</h1>
                                 <p>{description}</p>
-                                <a className="btn" onClick={timer > 0 ? null : handleCard}>{txtBtn}</a>
+                                <a className="btn" onClick={(timer > 0 || locked) ? null : handleCard}>{txtBtn}</a>
                             </div>
                         )
                     )}
@@ -88,8 +87,8 @@ const FoilEnvelopes = ({image, title, description, txtBtn}) => {
             </div>
 
             {showModal && (
-                <div>
-                    <FoilEnvelopesModal
+                <div id={'contentFoilsModal'} className={'contentFoilsModal'}>
+                    <FoilEnvelopesModalMemo
                         filteredCards={cards}
                         showModal={showModal}
                         setShowModal={setShowModal}
@@ -108,3 +107,5 @@ FoilEnvelopes.propTypes = {
 };
 
 export default FoilEnvelopes;
+
+const FoilEnvelopesModalMemo = React.memo(FoilEnvelopesModal);

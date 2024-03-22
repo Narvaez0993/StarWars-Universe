@@ -1,5 +1,6 @@
 import Modal from 'react-modal';
 import { category } from '../../../../obtainFoils/application/constants/optionCards';
+import { FaRegWindowClose } from "react-icons/fa";
 import PropTypes from 'prop-types';
 import './informationModal.scss';
 
@@ -84,23 +85,35 @@ const InformationModal = ({ data, showModal, setShowModal }) => {
     };
 
     return(
-        <Modal 
+        <Modal
             overlayClassName="custom-overlay" 
             isOpen={showModal} 
             onRequestClose={handleCloseModal}
-             style={{
+            style={{
                 content: {
-                  borderRadius: '10px',
-                  background: '#1f1f1f'
+                    borderRadius: '10px',
+                    background: 'black',
+                    borderColor: 'transparent',
+                    width: '50%',
+                    margin: '0 auto',
+                    boxShadow: '0 0 0.75rem #ffffff9c',
                 }
             }}
         >
-             <div className='foil-modal-container'>
+            <div className='foil-modal-container'>
+                <div className='modal-selectors'>
+                    <FaRegWindowClose  onClick={handleCloseModal} />
+                </div>
                 {renderObject()} 
             </div>
-        </Modal>
+        </Modal>  
     )
-
 }
+
+InformationModal.propTypes = {
+    data: PropTypes.object,
+    showModal: PropTypes.bool,
+    setShowModal: PropTypes.func
+};
 
 export default InformationModal;
