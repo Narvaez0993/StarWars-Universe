@@ -1,16 +1,35 @@
+@import '../../../../shared/application/theme/mixins.scss';
+
 .foils-container{
     display: flex;
     flex-direction: column;
     gap: 70px;
+    color: white;
 
     .section-title{
-        font-size: 30px;
+        font-size: 50px;
         font-weight: bold;
     }
 
     .selection-cards{
         display: flex;
-        gap: 30px;
+        gap: 40px;
         flex-wrap: wrap;
     }
 }
+
+@include small-view {
+    .foils-container{
+        gap: 46px;
+        margin-top: 30px;
+        
+        .section-title{
+            font-size: 25px !important;
+        }
+
+        .selection-cards{
+            justify-content: center !important;
+        }
+    }
+}
+  

@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { extractIdAndResourceType, categoryFoils } from '../../../application/helpers/common-functions';
 import InformationModal from '../../../../domains/myAlbum/presentation/components/InformationModal';
 import PropTypes from 'prop-types';
@@ -36,7 +36,7 @@ const ShowItems = ({title, filteredData, dataSize}) => {
             const id = index + 1;
             const data = albumData[index];
             return (
-                <div key={id} className="card" onClick={() => data && handleCard(data)}>
+                <div key={id} className="card" onClick={() => data && handleCard(data)} data-testid="card">
                     <h1>{id}</h1>
                     {data ? (
                         <>
