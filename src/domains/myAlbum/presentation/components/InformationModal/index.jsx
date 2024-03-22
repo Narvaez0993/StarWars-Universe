@@ -89,6 +89,7 @@ const InformationModal = ({ data, showModal, setShowModal }) => {
             overlayClassName="custom-overlay" 
             isOpen={showModal} 
             onRequestClose={handleCloseModal}
+            parentSelector={() => document.querySelector('#contentModalInfo')}
             style={{
                 content: {
                     borderRadius: '10px',
