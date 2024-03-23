@@ -64,7 +64,7 @@ const ShowItems = ({title, filteredData, dataSize}) => {
 
             {
                 showModal && (
-                    <div>
+                    <div id={'contentModalInfo'} className={'contentModalInfo'}>
                         <InformationModal
                             showModal={showModal}
                             setShowModal={setShowModal}

@@ -1,3 +1,4 @@
+@import '../../../application/theme/mixins.scss';
 .show-item-container{
     .title{
         font-size: 40px;
@@ -30,4 +31,21 @@
             box-shadow: 0 0 0.75rem #ffffff9c;
         }
     }
+}
+
+
+@include small-view {
+    .foils-data-container{
+        justify-content: center !important;
+    }
+
+    .contentModalInfo{
+        .ReactModalPortal{
+            div{
+                div{
+                    width: auto !important;
+                }
+            }
+        }
+    }  
 }
